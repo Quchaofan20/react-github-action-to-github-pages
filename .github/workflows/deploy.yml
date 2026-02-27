@@ -37,7 +37,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: pnpm Install
+      - name: install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10
@@ -47,11 +47,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
+
       - name: Install dependencies
-        run: pnpm Install
+        run: pnpm install
 
       - name: Build
         run: pnpm run build
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
