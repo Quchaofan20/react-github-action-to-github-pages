@@ -24,8 +24,12 @@ concurrency:
 jobs:
   # Single deploy job since we're just deploying
   deploy:
-    
-     strategy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    strategy:
       matrix:
         node-version: [20]
 
@@ -33,7 +37,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-        - name: Install pnpm
+      - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10
